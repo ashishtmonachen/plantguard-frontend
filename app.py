@@ -33,11 +33,17 @@ if uploaded_file:
     st.image(image, caption="Uploaded Image", use_column_width=True)
 
     if st.button("🔍 Predict Disease"):
-        with st.spinner("Analyzing the image..."):
-            try:
-                # Send the image to the backend
-                files = {"image": uploaded_file.getvalue()}
-                response = requests.post("https://plantguard-backend.onrender.com/predict", files={"image": uploaded_file})
+    with st.spinner("Analyzing the image..."):
+        try:
+            # Prepare the file tuple: (filename, fileobject, mime)
+            files = {
+                "image": (uploaded_file.name, uploaded_file, uploaded_file.type)
+            }
+            response = requests.post(
+                "https://plantguard-backend.onrender.com/predict",
+                files=files
+            )
+
 
 
 
