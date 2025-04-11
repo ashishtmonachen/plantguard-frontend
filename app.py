@@ -5,7 +5,7 @@ import streamlit as st
 import requests
 from PIL import Image
 
-# Set up the Streamlit page
+# Set up the page
 st.set_page_config(page_title="PlantGuard AI", layout="centered")
 st.title("🌿 PlantGuard AI")
 st.subheader("Upload a leaf image to detect plant disease")
@@ -20,6 +20,11 @@ if uploaded_file:
 
     # Reset file pointer before sending to backend
     uploaded_file.seek(0)
+
+    # Show basic image info for debug
+    st.text(f"Image name: {uploaded_file.name}")
+    st.text(f"Image type: {uploaded_file.type}")
+    st.text(f"Image size: {uploaded_file.size} bytes")
 
     if st.button("🔍 Predict Disease"):
         with st.spinner("Analyzing the image..."):
